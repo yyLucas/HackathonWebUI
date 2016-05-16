@@ -1,0 +1,31 @@
+<div layout="row" layout-align="center center" layout-wrap>
+	<md-card flex="80">
+		<img ng-src="/resource/IMG_0001-mpzb4563p37vweifz4qv0vacvi8xuj70ts9mhbrji4.jpg" class="md-card-image" alt="Washed Out">
+		<md-card-title>
+		<md-card-title-text>
+		<span class="md-headline">Vertical action buttons</span>
+		</md-card-title-text>
+		</md-card-title>
+		<md-card-content>
+
+		</md-card-content>
+		<md-card-actions layout="column" layout-align="start">
+		<md-button>Action 1</md-button>
+		<md-button>Action 2</md-button>
+		</md-card-actions>
+	</md-card>
+    <md-button flex="30" class="md-raised md-primary" ng-click="backToVehicle()">Back To Vehicle</md-button>
+</div>
+
+<div layout="row" layout-wrap>
+   <md-card flex="24" ng-repeat="car in cars" style="float:left">
+      <div ng-click="editCar(car)">
+         <div>MAKE: {{car.makerName}}</div>
+         <div>MODEL: {{car.model}}</div>
+         <div>YEAR: {{car.year}}</div>
+         <div>ODOMETER: {{car.odometer| number}}</div>
+         <div>PRICE: {{car.price | currency}}</div> 
+      </div>
+   </md-card>   
+</div>
+
