@@ -23,21 +23,21 @@ angular
  	.config(['$urlRouterProvider', function ($urlRouterProvider) {
         $urlRouterProvider.otherwise(function($injector) {
             var $state = $injector.get("$state");
-            $state.go("carFilter");
+            $state.go("dashBoard");
         });     
     }])
 
  	.config(['$stateProvider', function ($stateProvider) {
         $stateProvider
-	        .state('carDetail', {
-	            url: "/carDetail",
-	            templateUrl: "/carDetail.html",
-	            controller:"carCtrl"
+	        .state('wardDetail', {
+	            url: "/wardDetail",
+	            templateUrl: "/wardDetail.html",
+	            controller:"wardCtrl"
 	    	})    
-	    	.state('carFilter', {
-                url: "/carFilter",
-                templateUrl: "/carFilter.html",
-                controller: 'carCtrl'
+	    	.state('dashBoard', {
+                url: "/dashBoard",
+                templateUrl: "/dashBoard.html",
+                controller: 'mainCtrl'
             });
     }])
 

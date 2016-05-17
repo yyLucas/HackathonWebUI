@@ -9,7 +9,7 @@
  */
  angular
  	.module('app.controllers', [])
- 	.controller('carCtrl', ['$scope', '$state', 'xtmotorsAPIService', function ($scope, $state, xtmotorsAPIService) {
+ 	.controller('mainCtrl', ['$scope', '$state', '$interval', 'xtmotorsAPIService', function ($scope, $state, $interval, xtmotorsAPIService) {
  
  		xtmotorsAPIService.query({section:'car/summary'})
           .$promise.then(function(cars){
@@ -18,12 +18,12 @@
             //console.log("error");
         });
 
-        $scope.editCar = function(car){
-        	$state.go('carDetail',{}, {reload: true});
+        $scope.editWard = function(){
+        	$state.go('wardDetail',{}, {reload: true});
         };
 
-        $scope.backToVehicle = function(car){
-        	$state.go('carFilter',{}, {reload: true});
+        $scope.backToDashboard = function(){
+        	$state.go('dashBoard',{}, {reload: true});
         };
 
         $scope.message = " hello Lucas!";
@@ -54,6 +54,18 @@
 		var slides = $scope.slides = [];
 		var currIndex = 0;
 
+		$scope.determinateValue = 30;
+		$scope.modes = [ ];
+            $scope.activated = true;
+
+		
+		$interval(function() {
+               $scope.determinateValue += 1;
+               if ($scope.determinateValue > 100) {
+                  $scope.determinateValue = 30;
+               }
+            }, 100, 0, true);
+
 		$scope.addSlide = function() {
 			var newWidth = 600 + slides.length + 1;
 			slides.push({
@@ -70,8 +82,11 @@
  	}])
 
 
-	.controller('mainCtrl', ['$rootScope','$scope', '$state',function($rootScope, $scope, $state){
+	.controller('wardCtrl', ['$rootScope','$scope', '$state',function($rootScope, $scope, $state){
 	    $rootScope.edit = function(){
 	    	$state.go('carFilter',{}, {reload: true});
 	    };
+
+	    $scope.make = [{name:'Make'}, {name:'Toyota'}, {name:'Honda'}, {name:'BMW'}];
+		$scope.selectedMake = $scope.make[0];
 	}]);

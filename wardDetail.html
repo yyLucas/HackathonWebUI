@@ -1,0 +1,47 @@
+<div layout="row" layout-align="center center" layout-wrap>
+	<md-card flex="80">
+		<md-card-title>
+		<md-card-title-text>
+		<span class="md-headline">Ward details</span>
+		</md-card-title-text>
+		</md-card-title>
+		<md-card-content layout="row" layout-wrap>
+			<md-input-container flex="50" class="md-block">
+              <label>Ward capacity</label>
+              <input name="makerName" disabled ng-model="vehicleModel.makerName">
+            </md-input-container>
+
+            <md-input-container flex="50" class="md-block">
+              <label>Patient number</label>
+              <input name="makerName" disabled ng-model="vehicleModel.makerName">
+            </md-input-container>
+
+            <md-list flex="50">
+      			<md-subheader class="md-no-sticky">Patient List</md-subheader>
+		      <md-list-item class="md-3-line" ng-repeat="item in make">
+		        <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
+		        <div class="md-list-item-text" layout="column">
+		          <h4>{{ item.name }}</h4>
+		          <p>{{ item.name }}</p>
+		        </div>
+		      </md-list-item>
+    		</md-list>
+
+    		<md-list flex="50">
+      			<md-subheader class="md-no-sticky">Waiting List</md-subheader>
+		      <md-list-item class="md-3-line" ng-repeat="item in make">
+		        <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
+		        <div class="md-list-item-text" layout="column">
+		          <h4>{{ item.name }}</h4>
+		          <p>{{ item.name }}</p>
+		        </div>
+		      </md-list-item>
+    		</md-list>
+
+
+		</md-card-content>
+	</md-card>
+    <md-button flex="30" class="md-raised md-primary" ng-click="backToDashboard()">Back To Dashboard</md-button>
+</div>
+
+

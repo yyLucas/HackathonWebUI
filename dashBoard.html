@@ -1,0 +1,55 @@
+<div layout="row" layout-wrap layout-align="center center">
+   <md-card flex="100">
+     <md-subheader class="md-primary">Dashboard</md-subheader>
+     <md-card-content>           
+     <form layout="row" layout-wrap name="wardInfo">
+
+         <md-datepicker flex="100" ng-model="date" md-placeholder="Enter date"></md-datepicker>
+
+         <md-card flex="24" ng-repeat="car in cars" style="float:left" ng-click="editWard()">
+            <md-card-title>
+            <md-card-title-text>
+               <span class="md-headline">{{ward.id}</span>
+            </md-card-title-text>
+            </md-card-title>
+
+            <md-card-content layout="row" layout-wrap>
+               <md-progress-linear flex="80" md-mode="determinate" ng-value="determinateValue"></md-progress-linear>
+               <span flex="20">{{determinateValue}}&nbsp/100</span>
+            </md-card-content>
+         </md-card>
+
+
+      <md-card flex="100">
+         <md-subheader class="md-primary">Overall summary</md-subheader>
+         <md-card-content layout="row" layout-wrap>           
+            <md-input-container flex="50" class="md-block">
+              <label>Total of patient today</label>
+              <input name="makerName" disabled ng-model="vehicleModel.makerName">
+            </md-input-container>
+
+            <md-input-container flex="50" class="md-block">
+              <label>Mortality Rate</label>
+              <input name="makerName" disabled ng-model="vehicleModel.makerName">
+            </md-input-container>
+
+            <md-input-container flex="50" class="md-block">
+              <label>Readmission Rate</label>
+              <input name="makerName" disabled ng-model="vehicleModel.makerName">
+            </md-input-container>
+
+            <md-input-container flex="50" class="md-block">
+              <label>First Patient died</label>
+              <input name="makerName" disabled ng-model="vehicleModel.makerName">
+              
+            </md-input-container>
+         </md-card-content>
+      </md-card>
+
+                  
+      </form>
+     </md-card-content>
+   </md-card>
+</div>
+
+
