@@ -9,8 +9,9 @@
  */
  angular
  	.module('app.services', [])
-	 	.service('xtmotorsAPIService', ['$resource','$http', function($resource,$http) {
-	        var apiUrl = 'http://xtmotorwebapi.azurewebsites.net/api/';
+	 	.service('hackathonAPIService', ['$resource','$http', function($resource,$http) {
+	        var apiUrl = 'http://orionhackathon2016-api.azurewebsites.net/';
+
 	        return $resource(apiUrl+':section/:id',{ id: '@_id' },{ 'update': { method: 'PUT' }});
 	            //   DEFAULT RESOURCE FUNTIONS
 	            //   'get':    {method:'GET'},

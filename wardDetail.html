@@ -7,13 +7,14 @@
 		</md-card-title>
 		<md-card-content layout="row" layout-wrap>
 			<md-input-container flex="50" class="md-block">
+			{{currentWard.capacity}}
               <label>Ward capacity</label>
-              <input name="makerName" disabled ng-model="vehicleModel.makerName">
+              <input name="makerName" disabled ng-model="currentWard.capacity">
             </md-input-container>
 
             <md-input-container flex="50" class="md-block">
               <label>Patient number</label>
-              <input name="makerName" disabled ng-model="vehicleModel.makerName">
+              <input name="makerName" disabled ng-model="currentWard.occupancy">
             </md-input-container>
 
             <md-list flex="50">

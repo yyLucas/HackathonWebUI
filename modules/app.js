@@ -32,7 +32,7 @@ angular
 	        .state('wardDetail', {
 	            url: "/wardDetail",
 	            templateUrl: "/wardDetail.html",
-	            controller:"wardCtrl"
+	            controller:"mainCtrl"
 	    	})    
 	    	.state('dashBoard', {
                 url: "/dashBoard",

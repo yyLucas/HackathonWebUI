@@ -7,12 +7,34 @@
     <link rel="stylesheet" href="/dist/app.css">
     <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
 
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
+
 
 </head>
     
 <body ng-app="xtmotorsWebsite" ng-controller="mainCtrl">
     
     <h1>Orion Health Hospital</h1>
+
+<div layout="row" layout-wrap layout-align="center center">
+    <div id="mapid" style="width: 800px; height: 480px; position: relative;" class="leaflet-container leaflet-fade-anim" tabindex="0">
+    <div class="leaflet-map-pane" style="transform: translate3d(0px, 800px, 0px);">
+    <div class="leaflet-tile-pane"><div class="leaflet-layer">
+    <div class="leaflet-tile-container leaflet-zoom-animated">
+    </div>
+    <div class="leaflet-tile-container leaflet-zoom-animated">
+    <img class="leaflet-tile leaflet-tile-loaded" src="map.png" style="height: 480px; width: 800px;left:0;top:-800px">
+    </div>
+    </div>
+    </div>
+    <div class="leaflet-objects-pane">
+    <div class="leaflet-shadow-pane">
+    <img src="http://cdn.leafletjs.com/leaflet/v0.7.7/images/marker-shadow.png" class="leaflet-marker-shadow leaflet-zoom-animated" style="margin-left: -12px; margin-top: -41px; width: 41px; height: 41px;">
+    </div>
+    </div>
+    </div><div class="leaflet-marker-pane"><img src="http://cdn.leafletjs.com/leaflet/v0.7.7/images/marker-icon.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" tabindex="0" style="margin-left: -12px; margin-top: -41px; width: 25px; height: 41px; z-index: -12;"></div><div class="leaflet-popup-pane"><div class="leaflet-popup  leaflet-zoom-animated" style="opacity: 1; bottom: 27px; left: -57px;"><a class="leaflet-popup-close-button" href="#close">×</a><div class="leaflet-popup-content-wrapper"><div class="leaflet-popup-content" style="width: 75px;"><b>Hello world!</b><br>I am a popup.</div></div><div class="leaflet-popup-tip-container"><div class="leaflet-popup-tip"></div></div></div></div></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left">
+    <div class="leaflet-control-zoom leaflet-bar leaflet-control"></div></div></div></div>
+</div>
 
     <ui-view layout="column" state="{{$state.current.name}}" >
      
@@ -32,6 +54,58 @@
     <script src="/modules/directives/app.directives.js"></script>
     <script src="/modules/services/app.services.js"></script>
     <script src="/dist/main.js"></script>
+
+
+ <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+ <script src="simpleheat.js"></script>
+ <script src="leaflet-heat.js"></script>
+ <script>
+    var overlays=[];
+    var root='http://orionhackathon2016-api.azurewebsites.net';
+    function GET(endpoint,callback) {
+        var oReq = new XMLHttpRequest();
+        oReq.addEventListener("load", function(){
+            callback(this.responseText);
+        });
+        oReq.open("GET", root+endpoint);
+        oReq.send();
+    }
+    var coords={
+        1:[74,-164.5],
+        2:[32,-150],
+        3:[20,152],
+        4:[60,-72],
+        5:[77.5,-2],
+        6:[75.5,97],
+        7:[47.5,3]
+    };
+    var mymap = L.map('mapid',{
+        zoomControl:false,
+        minZoom:1,
+        maxZoom:1,
+        dragging:false
+    }).setView([0, 0],1);
+    mymap.setMaxBounds(mymap.getBounds());
+    function setDate(date) {
+        //remove existing
+        for (var i = 0; i < overlays.length; i++) {
+            mymap.removeLayer(overlays[i]);
+        }
+        GET('/usage?date='+date, function (data) {
+            console.log(data);
+            data = JSON.parse(data);
+            for (var i = 0; i < data.length; i++) {
+                var row = data[i];
+                var circle = L.circle(coords[row.ward_id], row.occupancy * 1000000 / coords[row.ward_id][0], {
+                    color: 'red',
+                    fillColor: '#f03',
+                    fillOpacity: 0.5
+                }).bindPopup(row.name + '<br>' + 'Occupancy: ' + row.occupancy + '/' + row.capacity).addTo(mymap);
+                overlays.push(circle);
+            }
+        });
+    }
+</script>
 
 
     
